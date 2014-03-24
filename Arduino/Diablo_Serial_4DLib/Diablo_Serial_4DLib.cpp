@@ -1373,42 +1373,62 @@ word Diablo_Serial_4DLib::mem_Heap()
   return GetAckResp();
 }
 
+word Diablo_Serial_4DLib::peekM(word  Address)
+{
+  _virtualPort->print((char)(F_peekM >> 8)) ;
+  _virtualPort->print((char)(F_peekM)) ;
+  _virtualPort->print((char)(Address >> 8)) ;
+  _virtualPort->print((char)(Address)) ;
+  return GetAckResp() ;
+}
+
 word Diablo_Serial_4DLib::pin_HI(word Pin)
 {
-  _virtualPort->write(F_pin_HI >> 8) ;
-  _virtualPort->write(F_pin_HI) ;
-  _virtualPort->write(Pin >> 8) ;
-  _virtualPort->write(Pin) ;
+  _virtualPort->write((char)(F_pin_HI >> 8)) ;
+  _virtualPort->write((char)(F_pin_HI)) ;
+  _virtualPort->write((char)(Pin >> 8)) ;
+  _virtualPort->write((char)(Pin)) ;
   return GetAckResp() ;
 }
 
 word Diablo_Serial_4DLib::pin_LO(word Pin)
 {
-  _virtualPort->write(F_pin_LO >> 8) ;
-  _virtualPort->write(F_pin_LO) ;
-  _virtualPort->write(Pin >> 8) ;
-  _virtualPort->write(Pin) ;
+  _virtualPort->write((char)(F_pin_LO >> 8)) ;
+  _virtualPort->write((char)(F_pin_LO)) ;
+  _virtualPort->write((char)(Pin >> 8)) ;
+  _virtualPort->write((char)(Pin)) ;
   return GetAckResp() ;
 }
 
 word Diablo_Serial_4DLib::pin_Read(word Pin)
 {
-  _virtualPort->write(F_pin_Read >> 8) ;
-  _virtualPort->write(F_pin_Read) ;
-  _virtualPort->write(Pin >> 8) ;
-  _virtualPort->write(Pin) ;
+  _virtualPort->write((char)(F_pin_Read >> 8)) ;
+  _virtualPort->write((char)(F_pin_Read)) ;
+  _virtualPort->write((char)(Pin >> 8)) ;
+  _virtualPort->write((char)(Pin)) ;
   return GetAckResp() ;
 }
 
 word Diablo_Serial_4DLib::pin_Set(word Mode, word Pin)
 {
-  _virtualPort->write(F_pin_Set >> 8) ;
-  _virtualPort->write(F_pin_Set) ;
-  _virtualPort->write(Mode >> 8) ;
-  _virtualPort->write(Mode) ;
-  _virtualPort->write(Pin >> 8) ;
-  _virtualPort->write(Pin) ;
+  _virtualPort->write((char)(F_pin_Set >> 8)) ;
+  _virtualPort->write((char)(F_pin_Set)) ;
+  _virtualPort->write((char)(Mode >> 8)) ;
+  _virtualPort->write((char)(Mode)) ;
+  _virtualPort->write((char)(Pin >> 8)) ;
+  _virtualPort->write((char)(Pin)) ;
   return GetAckResp() ;
+}
+
+void Diablo_Serial_4DLib::pokeM(word  Address, word  WordValue)
+{
+  _virtualPort->print((char)(F_pokeM >> 8)) ;
+  _virtualPort->print((char)(F_pokeM)) ;
+  _virtualPort->print((char)(Address >> 8)) ;
+  _virtualPort->print((char)(Address)) ;
+  _virtualPort->print((char)(WordValue >> 8)) ;
+  _virtualPort->print((char)(WordValue)) ;
+  GetAck() ;
 }
 
 void Diablo_Serial_4DLib::putCH(word  WordChar)

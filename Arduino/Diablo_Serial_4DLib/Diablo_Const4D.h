@@ -1118,10 +1118,12 @@
 #define F_media_WrSector 23
 #define F_mem_Free -417
 #define F_mem_Heap -418
+#define F_peekM 39
 #define F_pin_HI -113
 #define F_pin_LO -114
 #define F_pin_Read -116
 #define F_pin_Set -112
+#define F_pokeM 40
 #define F_putCH -2
 #define F_putstr 24
 #define F_readString 34
