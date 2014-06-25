@@ -122,11 +122,13 @@ class Diablo_Serial_4DLib
 		word media_WrSector(t4DSector  SectorOut);
 		word mem_Free(word  Handle);
 		word mem_Heap();
+		word peekM(word  Address);
 		word pin_HI(word Pin);
 		word pin_LO(word Pin);
 		word pin_Read(word Pin);
 		word pin_Set(word Mode, word Pin);
-                void putCH(word  WordChar);
+		void pokeM(word  Address, word  WordValue);
+        void putCH(word  WordChar);
 		word putstr(char *  InString);
 		void snd_BufSize(word  Bufsize);
 		void snd_Continue();
