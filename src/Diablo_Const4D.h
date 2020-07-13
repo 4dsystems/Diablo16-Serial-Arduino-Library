@@ -727,7 +727,7 @@
   // for 'print' and 'putnum'
   //=======================================================
   // binary, no leading zeroes
-#define BIN                     0x0002 // binary, 16 digits, no leading zeroes
+// #define BIN                     0x0002 // binary, 16 digits, no leading zeroes
 #define BIN1                    0x0102 // binary, 1 digit, no leading zeroes
 #define BIN2                    0x0202 // binary, 2 digits, no leading zeroes
 #define BIN3                    0x0302 // binary, 3 digits, no leading zeroes
@@ -784,7 +784,7 @@
 #define BIN16ZB                 0x2002 // binary, 16 digits, leading blanks
 
   // signed decimal, no leading zeroes
-#define DEC                     0x050A // signed decimal, 5 digits, no leading zeroes
+// #define DEC                     0x050A // signed decimal, 5 digits, no leading zeroes
 #define DEC1                    0x010A // signed decimal, 1 digit, no leading zeroes
 #define DEC2                    0x020A // signed decimal, 2 digits, no leading zeroes
 #define DEC3                    0x030A // signed decimal, 3 digits, no leading zeroes
@@ -832,7 +832,7 @@
 #define UDEC5ZB                 0x650A // unsigned decimal, 5 digits, leading blanks
 
   // hex, with leading zero's
-#define HEX                     0x1410 // hex, 4 digits, leading zeroes
+// #define HEX                     0x1410 // hex, 4 digits, leading zeroes
 #define HEX1                    0x1110 // hex, 1 digit, leading zeroes
 #define HEX2                    0x1210 // hex, 2 digits, leading zeroes
 #define HEX3                    0x1310 // hex, 3 digits, leading zeroes
