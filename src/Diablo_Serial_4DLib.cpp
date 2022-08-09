@@ -220,7 +220,10 @@ word Diablo_Serial_4DLib::GetAckResData(t4DByteArray OutData, word size)
 void Diablo_Serial_4DLib::SetThisBaudrate(int Newrate)
 {
   int br ;
+  #if !defined(ARDUINO_ARCH_SAMD) || (ARDUINO_ARCH_SAM)
+  //Only done for non-SAMD/SAM architectures
   _virtualPort->flush() ;
+  #endif
 //  _virtualPort->end() ;
   switch(Newrate)
   {
@@ -267,7 +270,11 @@ void Diablo_Serial_4DLib::SetThisBaudrate(int Newrate)
   }
 //  _virtualPort->begin(br) ;
   delay(50) ; // Display sleeps for 100
+  
+  #if !defined(ARDUINO_ARCH_SAMD) || (ARDUINO_ARCH_SAM)
+  //Only done for non-SAMD/SAM architectures
   _virtualPort->flush() ;
+  #endif
 }
 
 //*********************************************************************************************//
