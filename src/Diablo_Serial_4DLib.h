@@ -16,12 +16,24 @@
 
 #include <string.h>
 
+#ifdef AVR
+#include <SoftwareSerial.h> // uncomment this line to add direct support for SoftwareSerial
+// #include <AltSoftSerial.h> // uncomment this line to add direct support for AltSoftSerial (Note: AltSoftSerial needs to be installed in Arduino IDE)
+#endif
+
 typedef void (*Tcallback4D)(int, unsigned char); 
 
 class Diablo_Serial_4DLib
 {
 	public:
-		Diablo_Serial_4DLib(Stream * virtualPort);
+		Diablo_Serial_4DLib(Stream * virtualPort, void (*setBaudRateHndl)(unsigned long) = NULL);
+		Diablo_Serial_4DLib(HardwareSerial * serial);
+#ifdef SoftwareSerial_h		
+		Diablo_Serial_4DLib(SoftwareSerial * serial);
+#endif
+#ifdef AltSoftSerial_h
+	    Diablo_Serial_4DLib(AltSoftSerial * serial);
+#endif
 		Tcallback4D Callback4D ;
 		
 		//Compound 4D Routines
@@ -193,7 +205,7 @@ class Diablo_Serial_4DLib
 		void blitComtoDisplay(word  X, word  Y, word  Width, word  Height, t4DByteArray  Pixels);
 		word file_FindFirstRet(char *  Filename, char *  StringIn);
 		word file_FindNextRet(char *  StringIn);
-		void setbaudWait(word  Newrate);
+		bool setbaudWait(word Newrate);
 		void GetAck(void);
 		
 		//4D Global Variables Used
@@ -206,7 +218,20 @@ class Diablo_Serial_4DLib
 									// or indeterminate (eg file_exec, file_run, file_callFunction) commands
 		
 	private:
-                Stream * _virtualPort;
+		bool unknownSerial = false;
+		Stream * _virtualPort;
+		unsigned long GetBaudRate(word Newrate);
+		void (*setBaudRateExternal)(unsigned long newRate);
+		void (Diablo_Serial_4DLib::*setBaudRateInternal)(unsigned long newRate);
+
+		void exSetBaudRateHndl(unsigned long newRate);
+		void hwSetBaudRateHndl(unsigned long newRate);
+#ifdef SoftwareSerial_h
+		void swSetBaudRateHndl(unsigned long newRate);
+#endif
+#ifdef AltSoftSerial_h
+		void alSetBaudRateHndl(unsigned long newRate);
+#endif
 
 		//Intrinsic 4D Routines
 		void WriteChars(char * charsout);
@@ -221,10 +246,10 @@ class Diablo_Serial_4DLib
 		word GetAckResSector(t4DSector Sector);
 		word GetAckResStr(char * OutStr);
 		word GetAckResData(t4DByteArray OutData, word size);
-		void SetThisBaudrate(int Newrate);
 		
 		void printNumber(unsigned long, uint8_t);
 		void printFloat(double number, uint8_t digits);
+
 };
  
 #endif
